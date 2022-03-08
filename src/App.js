@@ -1,12 +1,12 @@
 import "./App.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getUsers, addUser } from "./components/Users";
+import { getPosts, addPost } from "./components/Posts";
 import { useForm } from "react-hook-form";
 
 function App() {
   const dispatch = useDispatch();
-  const { users, loading } = useSelector((state) => state.users);
+  const { posts, loading } = useSelector((state) => state.posts);
   const {
     register,
     handleSubmit,
@@ -14,12 +14,11 @@ function App() {
     // formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    dispatch(addUser(data));
-    //console.log(data);
+    dispatch(addPost(data));
   };
 
   useEffect(() => {
-    dispatch(getUsers());
+    dispatch(getPosts());
   }, [dispatch]);
 
   return (
@@ -28,15 +27,16 @@ function App() {
         <form onSubmit={handleSubmit(onSubmit)}>
           {/* register your input into the hook by invoking the "register" function */}
           <input placeholder="Title" {...register("title")} />
+          <textarea placeholder="Body" {...register("body")} />
           <input type="submit" />
         </form>
       </div>
 
       {!loading
-        ? users?.map((user, i) => (
+        ? posts?.map((post, i) => (
             <div key="{i}">
-              <h2>{user.name}</h2>
-              <p>{user.email}</p>
+              <h2>{post.title}</h2>
+              <p>{post.body}</p>
             </div>
           ))
         : ""}

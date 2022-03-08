@@ -5,11 +5,11 @@ import reportWebVitals from "./reportWebVitals";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 
-import usersReducer from "./components/Users"; //import postSlice.reducer any name will do
+import postsReducer from "./components/Posts"; //import postSlice.reducer any name will do
 
 const store = configureStore({
   reducer: {
-    users: usersReducer,
+    posts: postsReducer,
   },
 });
 
